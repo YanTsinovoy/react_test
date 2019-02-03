@@ -1,5 +1,13 @@
 .App {
+  box-sizing: border-box;
   text-align: center;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  background-image: url("images/chatBack.png");
 }
 
 .App-logo {
@@ -21,7 +29,132 @@
 .App-link {
   color: #61dafb;
 }
-
+.messageBox {
+  display: flex;
+  position: relative;
+  width: 85vw;
+  border: 3px solid #156d72;
+  border-radius: 5px;
+  margin: 10px 0 10px 0;
+}
+#ms, #nk, .messageBox {
+  background-color: #dcf7f5;
+}
+.nick {
+  background: #69ccd1;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.arrow {
+  width: 64px;
+  height: 64px;
+  background-image: url("images/next.png");
+  transform: rotate(90deg);
+  box-shadow: 0 0 10px #000;
+  border-radius: 50%;
+  margin: 5px;
+}
+.arrow:hover {
+  box-shadow: 0 0 10px #000, 0 0 15px #000;
+}
+.arrow:active {
+  width: 56px;
+  height: 56px;
+  margin: 13px 13px 13px 13px;
+  background-position: center;
+}
+.panel {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.message {
+  font-size: 16px;
+  padding: 5px 10px 0 5px;
+  font-weight: 500;
+  overflow-x: hidden;
+}
+.time {
+  position: absolute;
+  right: 0;
+  background-color: #d3e8e6;
+  padding: 3px;
+}
+.sendBox {
+  display: flex;
+  flex-direction: row;
+  height: 15vh;
+  margin: 1vh 0 1vh 0;
+  background-image: linear-gradient(#074347, #156d72) ;
+  padding: 1vh;
+}
+#btn {
+  align-self: flex-start;
+  border:
+}
+#nk {
+  align-self: flex-start;
+}
+#ms {
+  width: 40vw;
+}
+#btn {
+  border: 0;
+  cursor: pointer;
+  user-select: none;
+	position: relative;
+	display: inline-block;
+	font-size: 22px;
+	padding: 20px 60px;
+	color: white;
+	margin: 20px 10px 10px;
+	border-radius: 6px;
+	text-align: center;
+	transition: top .01s linear;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  outline: none;
+}
+#btn {
+	background-color: #7fccde;
+	box-shadow: 0 0 0 1px #7fccde inset,
+				0 0 0 2px rgba(255,255,255,0.15) inset,
+				0 8px 0 0 rgba(102, 164, 178, .6),
+				0 8px 0 1px rgba(0,0,0,.4),
+				0 8px 8px 1px rgba(0,0,0,0.5);
+}
+#btn:hover   {background-color: #82D1E3; outline: none;}
+#btn:active {
+  outline: none;
+  top: 9px;
+	box-shadow: 0 0 0 1px #7fccde inset,
+				0 0 0 2px rgba(255,255,255,0.15) inset,
+				0 0 0 1px rgba(0,0,0,0.4);
+}
+.mainChat {
+  /* margin-left: 5vw; */
+  width: 90vw;
+  height: 71vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.message_table {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ff0000 url("images/newMes_icon.svg");
+  background-size: 85% 85%;
+  background-position: center;
+  left: 0
+}
+.chatPanel {
+  display: flex;
+  width: 90vw;
+  height: 10vh;
+  justify-content: space-around;
+  align-items: center;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
