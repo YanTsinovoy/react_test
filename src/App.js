@@ -19,31 +19,27 @@ let mapDsToPrInp = {addMes, inpSending, inpSent, inpFail, inpDef, scrOn, sendMes
 
 class Inputs extends Component {
     state =  {nick: "" , message: ""}
-    sendMessage = (nick, message) => {
-        this.props.inpSending()
-        return jsonPost("http://students.a-level.com.ua:10012",
-            {func: 'addMessage',
-             nick,
-             message}).then(response => {
-               getMessages().then(data => {
-                 return data.data
-               })
-               .then(data => {
-                 this.props.addMes(data)
-                 this.props.inpSent()
-                 this.props.inpDef()
-                 this.props.scrOn()
-               })
-             }).catch(err => {this.props.inpFail()})
-    }
     addInpValue = (nickVal, messageVal) => {
       this.setState({
         nick: nickVal ? nickVal : this.state.nick,
         message: messageVal ? messageVal : this.state.message
       })
     }
+    counter = 0
+    mesCleaner = () => {
+      console.warn("start")
+      //для недопущения постоянной перерисовки
+      return (num => {
+        console.warn("next", this.counter)
+        if(!this.counter++) this.setState({nick: this.state.nick,
+        message: ""})
+        return ""
+      })()
+    }
     render() {
       let pr = this.props
+      if(!pr.mesSt.clear)this.counter = 0//КОСТЫЛЬ
+      console.log(this.state)
         return (
             <div className="sendBox">
                 <input id="nk" disabled={pr.mesSt.disable}
@@ -55,12 +51,11 @@ class Inputs extends Component {
                   disabled={pr.mesSt.disable}
                   placeholder="message"
                   onChange={e => this.addInpValue(undefined ,e.target.value)}
-                  value={pr.mesSt.clear ? "" : undefined}
+                  value={pr.mesSt.clear ? this.mesCleaner() : undefined}
                 />
 
                 <button disabled={pr.mesSt.disable} id="btn" onClick={
                    () =>
-                   //this.sendMessage(this.state.nick, this.state.message)
                    this.props.sendMess(this.state.nick, this.state.message)
                 }>Send</button>
             </div>
@@ -108,7 +103,7 @@ class Chat extends Component {
   }
 }
 
-let MessageTable = (p) => {
+let MessageTable = p => {
       return (
         <div  className="message_table" style={{visibility: p.flag ? "visible" : "hidden" }}>
         </div>
@@ -146,7 +141,6 @@ class ChatContainer extends Component {
             />
             <div className="chatPanel">
               <MessageTable flag={this.props.flag}/>
-              {/*<Themes/>*/}
               <Arrow scroll={this.props.scrOn}/>
             </div>
           </>
